@@ -6,20 +6,21 @@ import {
   HStack,
   Link as ChakraLink,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
+  MenuRoot,
+  MenuTrigger,
+  MenuContent,
   MenuItem,
-  IconButton,
+  Icon,
   useBreakpointValue,
 } from '@chakra-ui/react'
-import { ColorModeButton } from '@chakra-ui/color-mode'
-import { HiMenu, HiX } from 'react-icons/hi'
+import { useTheme } from 'next-themes'
+import { HiMenu, HiX, HiMoon, HiSun } from 'react-icons/hi'
 import NextLink from 'next/link'
 import { useState } from 'react'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const { theme, setTheme } = useTheme()
   const showMobileMenu = useBreakpointValue({ base: true, md: false }, { fallback: 'md' })
 
   return (
@@ -49,103 +50,85 @@ export function Navbar() {
             <Box as="span" fontSize="2xl" color="brand.500">
               CA
             </Box>
-            <Box display={{ base: 'none', sm: 'block' }}>CACIC</Box>
+            <Box display={{ base: 'none', md: 'block' }}>CACIC</Box>
           </ChakraLink>
 
-          {/* Desktop Navigation Links */}
-          <HStack
-            as="nav"
-            spacing={6}
-            display={{ base: 'none', md: 'flex' }}
-          >
-            <ChakraLink
-              as={NextLink}
-              href="/blog"
-              _hover={{ color: 'brand.500' }}
-            >
+          {/* Desktop Navigation */}
+          <HStack display={{ base: 'none', md: 'flex' }} gap={8}>
+            <ChakraLink as={NextLink} href="/blog" _hover={{ color: 'brand.500' }}>
               Blog
             </ChakraLink>
-            <ChakraLink
-              as={NextLink}
-              href="/eventos"
-              _hover={{ color: 'brand.500' }}
-            >
+            <ChakraLink as={NextLink} href="/eventos" _hover={{ color: 'brand.500' }}>
               Eventos
             </ChakraLink>
-            <ChakraLink
-              as={NextLink}
-              href="/trabalhos"
-              _hover={{ color: 'brand.500' }}
-            >
+            <ChakraLink as={NextLink} href="/trabalhos" _hover={{ color: 'brand.500' }}>
               Trabalhos
             </ChakraLink>
-            <ChakraLink
-              as={NextLink}
-              href="/membros"
-              _hover={{ color: 'brand.500' }}
-            >
+            <ChakraLink as={NextLink} href="/membros" _hover={{ color: 'brand.500' }}>
               Membros
             </ChakraLink>
-            <ChakraLink
-              as={NextLink}
-              href="/sobre"
-              _hover={{ color: 'brand.500' }}
-            >
+            <ChakraLink as={NextLink} href="/sobre" _hover={{ color: 'brand.500' }}>
               Sobre
+            </ChakraLink>
+            <ChakraLink as={NextLink} href="/contato" _hover={{ color: 'brand.500' }}>
+              Contato
             </ChakraLink>
           </HStack>
 
-          {/* Right: Dark Mode Toggle + Login Button */}
-          <HStack spacing={4} display={{ base: 'none', md: 'flex' }}>
-            <ColorModeButton />
+          {/* Right side */}
+          <HStack gap={4}>
             <Button
-              as={NextLink}
-              href="/login"
-              bg="brand.500"
-              color="black"
-              _hover={{ bg: 'brand.600' }}
-              size="sm"
-              fontWeight="bold"
+              variant="ghost"
+              size="lg"
+              p={0}
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             >
-              Login
+              <Icon as={theme === 'dark' ? HiSun : HiMoon} boxSize={6} />
             </Button>
-          </HStack>
 
-          {/* Mobile Menu Button */}
-          {showMobileMenu && (
-            <HStack spacing={2}>
-              <ColorModeButton />
-              <Menu isOpen={isOpen} onClose={() => setIsOpen(false)}>
-                <MenuButton
-                  as={IconButton}
-                  icon={isOpen ? <HiX /> : <HiMenu />}
-                  variant="ghost"
-                  size="lg"
-                  aria-label="Menu"
-                />
-                <MenuList>
-                  <MenuItem as={NextLink} href="/blog">
-                    Blog
+            {/* Mobile Menu */}
+            {showMobileMenu ? (
+              <MenuRoot>
+                <MenuTrigger asChild>
+                  <Button variant="ghost" size="lg" p={0}>
+                    <Icon as={isOpen ? HiX : HiMenu} boxSize={6} />
+                  </Button>
+                </MenuTrigger>
+                <MenuContent>
+                  <MenuItem value="blog">
+                    <ChakraLink as={NextLink} href="/blog">
+                      Blog
+                    </ChakraLink>
                   </MenuItem>
-                  <MenuItem as={NextLink} href="/eventos">
-                    Eventos
+                  <MenuItem value="eventos">
+                    <ChakraLink as={NextLink} href="/eventos">
+                      Eventos
+                    </ChakraLink>
                   </MenuItem>
-                  <MenuItem as={NextLink} href="/trabalhos">
-                    Trabalhos
+                  <MenuItem value="trabalhos">
+                    <ChakraLink as={NextLink} href="/trabalhos">
+                      Trabalhos
+                    </ChakraLink>
                   </MenuItem>
-                  <MenuItem as={NextLink} href="/membros">
-                    Membros
+                  <MenuItem value="membros">
+                    <ChakraLink as={NextLink} href="/membros">
+                      Membros
+                    </ChakraLink>
                   </MenuItem>
-                  <MenuItem as={NextLink} href="/sobre">
-                    Sobre
+                  <MenuItem value="sobre">
+                    <ChakraLink as={NextLink} href="/sobre">
+                      Sobre
+                    </ChakraLink>
                   </MenuItem>
-                  <MenuItem as={NextLink} href="/login">
-                    Login
+                  <MenuItem value="contato">
+                    <ChakraLink as={NextLink} href="/contato">
+                      Contato
+                    </ChakraLink>
                   </MenuItem>
-                </MenuList>
-              </Menu>
-            </HStack>
-          )}
+                </MenuContent>
+              </MenuRoot>
+            ) : null}
+          </HStack>
         </Flex>
       </Container>
     </Box>

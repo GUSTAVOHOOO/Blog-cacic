@@ -6,8 +6,7 @@ import {
   HStack,
   Link as ChakraLink,
   Text,
-  IconButton,
-  Divider,
+  Icon,
 } from '@chakra-ui/react'
 import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
 import NextLink from 'next/link'
@@ -18,26 +17,32 @@ export function Footer() {
   return (
     <Box as="footer" bg="text.primary" color="bg.canvas" mt={16} pt={12} pb={6}>
       <Container maxW="container.xl">
-        <VStack spacing={8} align="stretch">
+        <VStack gap={8} align="stretch">
           {/* Footer Content */}
-          <HStack justify={{ base: 'center', md: 'space-between' }} flexWrap="wrap" spacing={8}>
+          <HStack justify={{ base: 'center', md: 'space-between' }} flexWrap="wrap" gap={8}>
             {/* Column 1: About */}
-            <VStack align={{ base: 'center', md: 'start' }} spacing={2}>
-              <Text fontWeight="bold" fontSize="lg">
-                CACIC
+            <VStack align={{ base: 'center', md: 'start' }} gap={3}>
+              <Text fontWeight="bold" fontSize="sm">
+                Sobre
               </Text>
-              <Text fontSize="sm" color="bg.card" maxW="sm">
-                Centro Acadêmico de Ciências da Computação — UTFPR Santa Helena
-              </Text>
+              <ChakraLink as={NextLink} href="/sobre" fontSize="sm" _hover={{ color: 'brand.500' }}>
+                Sobre CACIC
+              </ChakraLink>
+              <ChakraLink as={NextLink} href="/membros" fontSize="sm" _hover={{ color: 'brand.500' }}>
+                Membros
+              </ChakraLink>
             </VStack>
 
             {/* Column 2: Links */}
-            <VStack align={{ base: 'center', md: 'start' }} spacing={2}>
+            <VStack align={{ base: 'center', md: 'start' }} gap={3}>
               <Text fontWeight="bold" fontSize="sm">
-                Links
+                Conteúdo
               </Text>
               <ChakraLink as={NextLink} href="/blog" fontSize="sm" _hover={{ color: 'brand.500' }}>
                 Blog
+              </ChakraLink>
+              <ChakraLink as={NextLink} href="/trabalhos" fontSize="sm" _hover={{ color: 'brand.500' }}>
+                Trabalhos
               </ChakraLink>
               <ChakraLink as={NextLink} href="/eventos" fontSize="sm" _hover={{ color: 'brand.500' }}>
                 Eventos
@@ -48,57 +53,46 @@ export function Footer() {
             </VStack>
 
             {/* Column 3: Social Icons */}
-            <VStack align={{ base: 'center', md: 'start' }} spacing={3}>
+            <VStack align={{ base: 'center', md: 'start' }} gap={3}>
               <Text fontWeight="bold" fontSize="sm">
                 Siga-nos
               </Text>
-              <HStack spacing={3}>
-                <IconButton
+              <HStack gap={3}>
+                <ChakraLink
                   as="a"
                   href="https://github.com/cacic-ufpr"
                   target="_blank"
                   rel="noopener noreferrer"
-                  icon={<FiGithub />}
-                  variant="ghost"
-                  size="lg"
-                  aria-label="GitHub"
                   _hover={{ color: 'brand.500' }}
-                />
-                <IconButton
+                >
+                  <Icon as={FiGithub} boxSize={6} />
+                </ChakraLink>
+                <ChakraLink
                   as="a"
                   href="https://linkedin.com/company/cacic-ufpr"
                   target="_blank"
                   rel="noopener noreferrer"
-                  icon={<FiLinkedin />}
-                  variant="ghost"
-                  size="lg"
-                  aria-label="LinkedIn"
                   _hover={{ color: 'brand.500' }}
-                />
-                <IconButton
+                >
+                  <Icon as={FiLinkedin} boxSize={6} />
+                </ChakraLink>
+                <ChakraLink
                   as="a"
                   href="mailto:cacic@ufpr.br"
-                  icon={<FiMail />}
-                  variant="ghost"
-                  size="lg"
-                  aria-label="E-mail"
                   _hover={{ color: 'brand.500' }}
-                />
+                >
+                  <Icon as={FiMail} boxSize={6} />
+                </ChakraLink>
               </HStack>
             </VStack>
           </HStack>
 
-          <Divider borderColor="border.default" />
-
           {/* Copyright */}
-          <VStack spacing={2} textAlign="center">
-            <Text fontSize="xs" color="bg.card">
-              © {currentYear} Centro Acadêmico de Ciências da Computação
+          <Box borderTopWidth="1px" borderColor="border.default" pt={6} w="full" textAlign="center">
+            <Text fontSize="xs" color="text.secondary">
+              &copy; {currentYear} CACIC - Clube de Automação e Computação da UTFPR. Todos os direitos reservados.
             </Text>
-            <Text fontSize="xs" color="bg.card">
-              UTFPR — Campus Santa Helena
-            </Text>
-          </VStack>
+          </Box>
         </VStack>
       </Container>
     </Box>
