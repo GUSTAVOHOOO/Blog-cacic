@@ -13,7 +13,7 @@ The blog is built in six phases, each delivering a coherent capability. Foundati
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Foundation** - Project scaffolding, Supabase schema, storage buckets, security baseline
-- [ ] **Phase 2: Auth & Design System** - Magic Link auth pipeline + Chakra UI theme + layout shell
+- [x] **Phase 2: Auth & Design System** - Magic Link auth pipeline + Chakra UI theme + layout shell (completed 2026-03-10)
 - [ ] **Phase 3: Content & API Layer** - MDX pipeline, Data Access Layer, all Route Handlers
 - [ ] **Phase 4: Public Pages** - All 12 public-facing pages wired to content and Supabase data
 - [ ] **Phase 5: Dashboard** - Private member area for events, academic works, and contact management
@@ -113,7 +113,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | All plans executed, awaiting checkpoints | 2026-03-09 |
-| 2. Auth & Design System | 5/6 | Plans 02-01 through 02-05 complete (theme + auth + layout + cards + hero), proceeding to 02-06 | 2026-03-10 |
+| 2. Auth & Design System | 7/7 | Complete   | 2026-03-10 |
 | 3. Content & API Layer | 0/TBD | Not started | - |
 | 4. Public Pages | 0/TBD | Not started | - |
 | 5. Dashboard | 0/TBD | Not started | - |
