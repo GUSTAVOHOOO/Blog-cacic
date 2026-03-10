@@ -86,6 +86,22 @@ export function Navbar() {
               <Icon as={resolvedTheme === 'dark' ? HiSun : HiMoon} boxSize={6} />
             </Button>
 
+            <ChakraLink
+              as={NextLink}
+              href="/login"
+              bg="brand.500"
+              color="black"
+              _hover={{ bg: 'brand.600', textDecoration: 'none' }}
+              display={{ base: 'none', md: 'inline-flex' }}
+              px={4}
+              py={2}
+              borderRadius="md"
+              fontSize="sm"
+              fontWeight="bold"
+            >
+              Login
+            </ChakraLink>
+
             {/* Mobile Menu */}
             {showMobileMenu ? (
               <MenuRoot>
@@ -123,6 +139,11 @@ export function Navbar() {
                   <MenuItem value="contato">
                     <ChakraLink as={NextLink} href="/contato">
                       Contato
+                    </ChakraLink>
+                  </MenuItem>
+                  <MenuItem value="login">
+                    <ChakraLink as={NextLink} href="/login">
+                      Login
                     </ChakraLink>
                   </MenuItem>
                 </MenuContent>

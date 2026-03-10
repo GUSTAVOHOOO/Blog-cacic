@@ -9,9 +9,9 @@ export async function loginWithMagicLink(formData: FormData) {
     const parsed = loginSchema.parse({ email: rawEmail })
     const email = parsed.email
 
-    // CRITICAL: Domain validation — @ufpr.br only (AUTH-01)
-    if (!email.endsWith('@ufpr.br')) {
-      throw new Error('Use seu e-mail institucional da UFPR (@ufpr.br)')
+    // CRITICAL: Domain validation — @alunos.utfpr.edu.br only (AUTH-01)
+    if (!email.endsWith('@alunos.utfpr.edu.br')) {
+      throw new Error('Use seu e-mail institucional de aluno da UFPR (@alunos.utfpr.edu.br)')
     }
 
     // Create server client and request magic link

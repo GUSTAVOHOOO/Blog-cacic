@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { Container, Heading, Text, Input, Button, Box } from '@chakra-ui/react'
 import { loginWithMagicLink } from './actions'
+import styles from './page.module.css'
 
 export default function LoginPage() {
   const [isPending, setIsPending] = useState(false)
@@ -35,22 +36,22 @@ export default function LoginPage() {
           </Text>
         </Box>
 
-        <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+        <form onSubmit={handleSubmit} className={styles.form}>
           <Box display="flex" flexDirection="column" gap={4} width="100%">
             <Box>
-              <label htmlFor="email" style={{ display: 'block', marginBottom: '8px' }}>
+              <label htmlFor="email" className={styles.label}>
                 <Text fontSize="sm" fontWeight="500">E-mail Institucional</Text>
               </label>
               <Input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="seu.email@ufpr.br"
+                placeholder="seu.email@alunos.utfpr.edu.br"
                 disabled={isPending}
                 required
               />
               <Text fontSize="xs" color="text.secondary" mt={2}>
-                Use apenas e-mails terminados em @ufpr.br
+                Use apenas e-mails terminados em @alunos.utfpr.edu.br
               </Text>
             </Box>
 
