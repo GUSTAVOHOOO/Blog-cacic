@@ -10,17 +10,17 @@ See: .planning/PROJECT.md (updated 2026-03-09)
 ## Current Position
 
 Phase: 2 of 6 (Auth & Design System)
-Plan: 4 of 6 in current phase (completed)
-Status: Phase 2 plan 4 complete (Card components); ready for plan 5 (Hero section)
-Last activity: 2026-03-10 — Executed Phase 2 Plan 4 (all card components created)
+Plan: 5 of 6 in current phase (completed)
+Status: Phase 2 plan 5 complete (Hero section with SplitText animation); ready for plan 6 (Layout integration)
+Last activity: 2026-03-10 — Executed Phase 2 Plan 5 (Hero section with animated title created)
 
-Progress: [████████░░] 35% (8 plans executed: 4 from phase 1, 4 from phase 2)
+Progress: [█████████░] 38% (9 plans executed: 4 from phase 1, 5 from phase 2)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans executed: 8 (4 from phase 1, 4 from phase 2)
-- Duration: ~2.85 hours (phase 1: ~1.5h, phase 2 plan 1: ~15 min, phase 2 plan 2: ~45 min, phase 2 plan 3: ~10 min, phase 2 plan 4: ~45 min)
+- Total plans executed: 9 (4 from phase 1, 5 from phase 2)
+- Duration: ~3 hours (phase 1: ~1.5h, phase 2 plan 1: ~15 min, phase 2 plan 2: ~45 min, phase 2 plan 3: ~10 min, phase 2 plan 4: ~45 min, phase 2 plan 5: ~15 min)
 - Awaiting: 2 checkpoint approvals (Supabase setup, Vercel deployment from phase 1)
 
 **By Phase:**
@@ -28,17 +28,18 @@ Progress: [████████░░] 35% (8 plans executed: 4 from phase 1
 | Phase | Plans | Status | Avg Duration |
 |-------|-------|--------|--------------|
 | 1 (Foundation) | 4/4 | Automated done, checkpoints pending | 20 min per plan |
-| 2 (Auth & Design System) | 4/6 | Plans 01-04 complete (Theme + Auth + Layout + Cards) | ~28 min per plan |
+| 2 (Auth & Design System) | 5/6 | Plans 01-05 complete (Theme + Auth + Layout + Cards + Hero) | ~22 min per plan |
 
 **Recent Trend:**
-- Automated execution: Phase 2 Plans 1-4 completed (Chakra UI + Auth + Layout + Cards)
-- Fixed Chakra UI v3 API compatibility (Card -> CardRoot, spacing -> gap, etc.)
+- Automated execution: Phase 2 Plans 1-5 completed (Chakra UI + Auth + Layout + Cards + Hero)
+- Fixed Chakra UI v3 API compatibility (Card -> CardRoot, spacing -> gap, as -> asChild, etc.)
 - Five card components created: PostCard, EventCard, WorkCard, MemberCard, CategoryBadge
+- Hero section with custom SplitText animation component (Framer Motion-based)
 - Navbar and Footer updated for v3 API (MenuRoot/Trigger, next-themes toggle)
 - All components using semantic tokens, responsive design, and dark mode support
 - Build succeeds with zero TypeScript errors
 
-*Updated after plan 02-04 execution*
+*Updated after plan 02-05 execution*
 
 ## Accumulated Context
 
@@ -81,11 +82,14 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-03-10
-Stopped at: Phase 2 Plan 4 (02-04) complete. All card components created and tested. Build succeeds.
+Stopped at: Phase 2 Plan 5 (02-05) complete. Hero section with SplitText animation created. Build succeeds.
 
-Resumption: Ready to execute Phase 2 Plan 5 (Hero section with SplitText animation).
+Resumption: Ready to execute Phase 2 Plan 6 (Layout integration and Phase 2 verification checkpoint).
 
-**Completed Plan 02-04 Commits:**
+**Completed Plan 02-05 Commits:**
+- 97c86c9: feat(02-05): create hero section component with SplitText animation
+
+**Previous Plan 02-04 Commits:**
 - c5fc785: feat(02-04): create CategoryBadge component with category-specific colors
 - d19bc03: feat(02-04): create PostCard component with left border and category badge
 - 5be6916: feat(02-04): create EventCard component with event type icon and date
