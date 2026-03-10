@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { Providers } from '@/components/providers/chakra-provider'
+import { Navbar } from '@/components/layout/navbar'
+import { Footer } from '@/components/layout/footer'
 import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google'
 
 const spaceGrotesk = Space_Grotesk({
@@ -39,7 +41,9 @@ export default function RootLayout({
     >
       <body>
         <Providers>
+          <Navbar />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>
