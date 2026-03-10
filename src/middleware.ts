@@ -36,5 +36,5 @@ export async function middleware(request: NextRequest) {
 
 // Configure which routes to protect
 export const config = {
-  matcher: ['/dashboard/:path*', '/auth/:path*'],
+  matcher: ['/dashboard/:path*'],
 }
