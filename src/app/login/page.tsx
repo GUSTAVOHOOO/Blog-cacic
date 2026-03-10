@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Container, Heading, Text, Input, Button, Box } from '@chakra-ui/react'
-import { loginWithMagicLink } from './actions'
+import { createClient } from '@/lib/supabase/client'
 import styles from './page.module.css'
 
 export default function LoginPage() {
@@ -16,12 +16,38 @@ export default function LoginPage() {
     setIsPending(true)
 
     const formData = new FormData(e.currentTarget)
-    const result = await loginWithMagicLink(formData)
+    const rawEmail = (formData.get('email') as string).trim().toLowerCase()
 
-    if (result.success) {
+    // Domain validation — @alunos.utfpr.edu.br only (AUTH-01)
+    if (!rawEmail.endsWith('@alunos.utfpr.edu.br')) {
+      setError('Use seu e-mail institucional de aluno da UFPR (@alunos.utfpr.edu.br)')
+      setIsPending(false)
+      return
+    }
+
+    try {
+      // IMPORTANT: Must use browser client (createBrowserClient) so that the
+      // PKCE code verifier is stored in cookies on the USER's browser.
+      // Calling signInWithOtp from a Server Action cannot store cookies client-side,
+      // which causes the "PKCE code verifier not found in storage" error.
+      const supabase = createClient()
+      const { error: authError } = await supabase.auth.signInWithOtp({
+        email: rawEmail,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          shouldCreateUser: true,
+        },
+      })
+
+      if (authError) {
+        console.error('[login] signInWithOtp error:', authError.message)
+        throw new Error('Erro ao enviar link. Tente novamente.')
+      }
+
       router.push('/login/verifique-seu-email')
-    } else {
-      setError(result.error ?? 'Erro desconhecido')
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Erro desconhecido'
+      setError(message)
       setIsPending(false)
     }
   }
@@ -34,7 +60,7 @@ export default function LoginPage() {
             Acesse sua conta
           </Heading>
           <Text color="text.secondary">
-            Enviamos um link para seu e-mail
+            Enviamos um link mágico para seu e-mail
           </Text>
         </Box>
 
