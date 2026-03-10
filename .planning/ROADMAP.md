@@ -52,7 +52,7 @@ Plans:
 **Plans**: 6 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Chakra UI v3 setup, theme config, semantic tokens, Google Fonts
+- [x] 02-01-PLAN.md — Chakra UI v3 setup, theme config, semantic tokens, Google Fonts
 - [ ] 02-02-PLAN.md — Magic Link auth pipeline (login form, callback, middleware)
 - [ ] 02-03-PLAN.md — Navbar and Footer (responsive layout shell)
 - [ ] 02-04-PLAN.md — Card components (PostCard, EventCard, WorkCard, MemberCard)
@@ -112,8 +112,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 4/4 | All plans executed, awaiting checkpoints | - |
-| 2. Auth & Design System | 0/6 | Planning complete, ready for execution | - |
+| 1. Foundation | 4/4 | All plans executed, awaiting checkpoints | 2026-03-09 |
+| 2. Auth & Design System | 1/6 | Plan 02-01 complete, proceeding to 02-02 | 2026-03-10 |
 | 3. Content & API Layer | 0/TBD | Not started | - |
 | 4. Public Pages | 0/TBD | Not started | - |
 | 5. Dashboard | 0/TBD | Not started | - |

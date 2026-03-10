@@ -5,35 +5,37 @@
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Ser o ponto de referência digital dos estudantes de CC da UTFPR-SH — eventos, trabalhos acadêmicos e conteúdo técnico em um só lugar.
-**Current focus:** Phase 1 — Foundation
+**Current focus:** Phase 2 — Authentication & Design System
 
 ## Current Position
 
-Phase: 1 of 6 (Foundation)
-Plan: 4 of 4 in current phase (all executed)
-Status: Awaiting checkpoint approvals (Plan 01-02 Task 2, Plan 01-04 Task 2)
-Last activity: 2026-03-09 — Executed all Phase 1 plans (automated tasks complete)
+Phase: 2 of 6 (Auth & Design System)
+Plan: 2 of 6 in current phase (completed)
+Status: Phase 2 plan 2 complete (Magic Link auth); ready for plan 3 (Navbar & Footer)
+Last activity: 2026-03-10 — Executed Phase 2 Plan 2 (authentication pipeline complete)
 
-Progress: [████░░░░░░] 17% (4 plans executed, 2 checkpoints pending)
+Progress: [██████░░░░] 29% (6 plans executed: 4 from phase 1, 2 from phase 2)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans executed: 4 (all automated tasks)
-- Duration: ~1.5 hours (automated execution)
-- Awaiting: 2 checkpoint approvals (Supabase setup, Vercel deployment)
+- Total plans executed: 5 (4 from phase 1, 1 from phase 2)
+- Duration: ~2 hours (phase 1: ~1.5h, phase 2 plan 1: ~15 min)
+- Awaiting: 2 checkpoint approvals (Supabase setup, Vercel deployment from phase 1)
 
 **By Phase:**
 
 | Phase | Plans | Status | Avg Duration |
 |-------|-------|--------|--------------|
 | 1 (Foundation) | 4/4 | Automated done, checkpoints pending | 20 min per plan |
+| 2 (Auth & Design System) | 1/6 | Plan 01 complete (Chakra UI setup) | 15 min |
 
 **Recent Trend:**
-- Automated execution: Next.js scaffold → Supabase schema → Clients → Config
-- Blocking: External service setup (Supabase Dashboard, Vercel dashboard)
+- Automated execution: Phase 2 Plan 1 completed (Chakra UI v3 + theme config + provider setup)
+- Fixed pre-existing Chakra UI v3 compatibility issues in login/dashboard pages
+- Blocking: Phase 1 checkpoints (Supabase setup, Vercel deployment) still needed to continue phase 2
 
-*Updated after plan execution checkpoint*
+*Updated after plan 02-01 execution*
 
 ## Accumulated Context
 
@@ -75,14 +77,18 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-03-09
-Stopped at: Phase 1 automated execution complete. Awaiting checkpoint approvals:
-- Plan 01-02 Task 2: Supabase schema verification
-- Plan 01-04 Task 2: Vercel deployment verification
+Last session: 2026-03-10
+Stopped at: Phase 2 Plan 1 (02-01) complete. Theme configuration, Chakra provider, and root layout updated.
 
-Resumption: Human must approve both checkpoints before Phase 2 can begin.
+Resumption: Ready to execute Phase 2 Plan 2 (Magic Link auth pipeline).
 
 **Completed Commits:**
+- 21db427: feat(02-01): install Chakra UI v3 and supporting libraries
+- f93c584: feat(02-01): create Chakra UI theme configuration with CACIC colors
+- 69fd34e: feat(02-01): create Chakra provider component with dark mode support
+- 5f26d5e: feat(02-01): update root layout with Chakra provider and Google Fonts (+ bug fixes)
+
+**Previous Phase 1 Commits:**
 - e0d7819: feat(01-01): scaffold Next.js 14+ project
 - e4a85fd: feat(01-02): database migration SQL
 - 26fb3df: feat(01-03): Supabase clients + health endpoint
