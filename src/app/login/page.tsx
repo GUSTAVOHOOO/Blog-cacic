@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import styles from './page.module.css'
 import {
   Container,
   Heading,
@@ -50,9 +51,9 @@ export default function LoginPage() {
           <Box display="flex" flexDirection="column" gap={4}>
 
             <Box display="flex" flexDirection="column" gap={1}>
-              <Text as="label" htmlFor="email" fontSize="sm" fontWeight="500">
+              <label htmlFor="email" className={styles.fieldLabel}>
                 E-mail
-              </Text>
+              </label>
               <Input
                 id="email"
                 name="email"
@@ -64,9 +65,9 @@ export default function LoginPage() {
             </Box>
 
             <Box display="flex" flexDirection="column" gap={1}>
-              <Text as="label" htmlFor="password" fontSize="sm" fontWeight="500">
+              <label htmlFor="password" className={styles.fieldLabel}>
                 Senha
-              </Text>
+              </label>
               <Input
                 id="password"
                 name="password"
