@@ -1,7 +1,9 @@
+import { HeroSection } from '@/components/hero/hero-section'
+
 export default function Home() {
   return (
     <main>
-      <h1>Blog CACIC — em construção</h1>
+      <HeroSection />
     </main>
-  );
+  )
 }

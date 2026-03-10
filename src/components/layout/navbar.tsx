@@ -20,7 +20,7 @@ import { useState } from 'react'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
   const showMobileMenu = useBreakpointValue({ base: true, md: false }, { fallback: 'md' })
 
   return (
@@ -81,9 +81,9 @@ export function Navbar() {
               variant="ghost"
               size="lg"
               p={0}
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
             >
-              <Icon as={theme === 'dark' ? HiSun : HiMoon} boxSize={6} />
+              <Icon as={resolvedTheme === 'dark' ? HiSun : HiMoon} boxSize={6} />
             </Button>
 
             {/* Mobile Menu */}
