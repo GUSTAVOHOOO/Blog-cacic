@@ -69,7 +69,14 @@ Plans:
   3. `POST /api/upload` rejects files exceeding size limits or invalid types with a descriptive error, and accepted files are stored in Supabase Storage with a UUID filename.
   4. Client components never import from `src/lib/services/` directly — all data access goes through server components or Route Handlers (verifiable by code review / lint rule).
   5. `POST /api/views` increments the view count for a post slug without requiring authentication.
-**Plans**: TBD
+**Plans**: 5 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — MDX content types, filesystem utilities (getAllPosts, getPostBySlug), example MDX files
+- [ ] 03-02-PLAN.md — Chakra-styled MDX components (headings, code, callouts, image, table)
+- [ ] 03-03-PLAN.md — Data Access Layer: 6 Supabase service files in src/lib/services/
+- [ ] 03-04-PLAN.md — Zod validation schemas + Upstash Redis rate limiter
+- [ ] 03-05-PLAN.md — All Route Handlers (contato, views, upload, eventos, trabalhos)
 
 ### Phase 4: Public Pages
 **Goal**: Every public page of the blog is live, navigable, and populated with real content — visitors can browse posts, events, academic works, and member info without logging in.
@@ -114,7 +121,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | All plans executed, awaiting checkpoints | 2026-03-09 |
 | 2. Auth & Design System | 7/7 | Complete   | 2026-03-10 |
-| 3. Content & API Layer | 0/TBD | Not started | - |
+| 3. Content & API Layer | 0/5 | Planning complete, ready to execute | - |
 | 4. Public Pages | 0/TBD | Not started | - |
 | 5. Dashboard | 0/TBD | Not started | - |
 | 6. SEO & Polish | 0/TBD | Not started | - |
