@@ -1,6 +1,6 @@
-import { Box, Container, Heading, Text, Button } from '@chakra-ui/react'
+import { Box, Container, Heading, Text, Button, Link as ChakraLink } from '@chakra-ui/react'
 import { createClient } from '@/lib/supabase/server'
-import Link from 'next/link'
+import NextLink from 'next/link'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -21,9 +21,13 @@ export default async function DashboardPage() {
         Este é um espaço protegido. Apenas usuários autenticados podem acessar.
       </Text>
 
-      <Button as={Link} href="/" bg="brand.500" color="black">
-        Voltar ao Home
-      </Button>
+      <ChakraLink asChild>
+        <NextLink href="/">
+          <Button bg="brand.500" color="black">
+            Voltar ao Home
+          </Button>
+        </NextLink>
+      </ChakraLink>
     </Container>
   )
 }

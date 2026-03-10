@@ -1,67 +1,77 @@
 'use client'
-import React from 'react'
-import { Box, Container, VStack, Heading, Text, Input, Button, FormControl, FormLabel, useToast } from '@chakra-ui/react'
-import { useActionState } from 'react'
+import React, { useState } from 'react'
+import { Container, Heading, Text, Input, Button, Box } from '@chakra-ui/react'
 import { loginWithMagicLink } from './actions'
 
 export default function LoginPage() {
-  const [state, formAction, isPending] = useActionState(loginWithMagicLink, null)
-  const toast = useToast()
+  const [isPending, setIsPending] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  // Show error toast if action fails
-  React.useEffect(() => {
-    if (state instanceof Error) {
-      toast({
-        title: 'Erro',
-        description: state.message,
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      })
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setError(null)
+    setIsPending(true)
+
+    const formData = new FormData(e.currentTarget)
+    try {
+      await loginWithMagicLink(formData)
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Erro desconhecido'
+      setError(message)
+    } finally {
+      setIsPending(false)
     }
-  }, [state, toast])
+  }
 
   return (
     <Container maxW="sm" py={20}>
-      <VStack spacing={8}>
-        <VStack spacing={2}>
+      <Box display="flex" flexDirection="column" gap={8}>
+        <Box display="flex" flexDirection="column" gap={2} textAlign="center">
           <Heading as="h1" size="lg">
             Acesse sua conta
           </Heading>
           <Text color="text.secondary">
             Enviamos um link para seu e-mail
           </Text>
-        </VStack>
+        </Box>
 
-        <form action={formAction} style={{ width: '100%' }}>
-          <FormControl isRequired>
-            <FormLabel htmlFor="email">E-mail Institucional</FormLabel>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="seu.email@ufpr.br"
+        <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+          <Box display="flex" flexDirection="column" gap={4} width="100%">
+            <Box>
+              <label htmlFor="email" style={{ display: 'block', marginBottom: '8px' }}>
+                <Text fontSize="sm" fontWeight="500">E-mail Institucional</Text>
+              </label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="seu.email@ufpr.br"
+                disabled={isPending}
+                required
+              />
+              <Text fontSize="xs" color="text.secondary" mt={2}>
+                Use apenas e-mails terminados em @ufpr.br
+              </Text>
+            </Box>
+
+            {error && (
+              <Text fontSize="sm" color="red.500">
+                {error}
+              </Text>
+            )}
+
+            <Button
+              w="full"
+              type="submit"
+              bg="brand.500"
+              color="black"
               disabled={isPending}
-              required
-            />
-            <Text fontSize="xs" color="text.secondary" mt={2}>
-              Use apenas e-mails terminados em @ufpr.br
-            </Text>
-          </FormControl>
-
-          <Button
-            w="full"
-            type="submit"
-            bg="brand.500"
-            color="black"
-            mt={6}
-            isLoading={isPending}
-            loadingText="Enviando..."
-          >
-            Enviar Link
-          </Button>
+            >
+              {isPending ? 'Enviando...' : 'Enviar Link'}
+            </Button>
+          </Box>
         </form>
-      </VStack>
+      </Box>
     </Container>
   )
 }
