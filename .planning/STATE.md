@@ -10,17 +10,17 @@ See: .planning/PROJECT.md (updated 2026-03-09)
 ## Current Position
 
 Phase: 2 of 6 (Auth & Design System)
-Plan: 5 of 6 in current phase (completed)
-Status: Phase 2 plan 5 complete (Hero section with SplitText animation); ready for plan 6 (Layout integration)
-Last activity: 2026-03-10 — Executed Phase 2 Plan 5 (Hero section with animated title created)
+Plan: 5 of 6 in current phase (completed) + gap-01 (dark mode) complete
+Status: Phase 2 gap-01 complete (dark mode theme integration fixed); ready for plan 6 (Layout integration)
+Last activity: 2026-03-10 — Executed Phase 2 Gap Plan 1 (dark mode fixed with next-themes integration)
 
-Progress: [█████████░] 38% (9 plans executed: 4 from phase 1, 5 from phase 2)
+Progress: [█████████░] 39% (10 plans executed: 4 from phase 1, 5 from phase 2, 1 gap closure)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans executed: 9 (4 from phase 1, 5 from phase 2)
-- Duration: ~3 hours (phase 1: ~1.5h, phase 2 plan 1: ~15 min, phase 2 plan 2: ~45 min, phase 2 plan 3: ~10 min, phase 2 plan 4: ~45 min, phase 2 plan 5: ~15 min)
+- Total plans executed: 10 (4 from phase 1, 5 from phase 2, 1 gap closure)
+- Duration: ~3 hours 12 minutes (phase 1: ~1.5h, phase 2 plan 1: ~15 min, phase 2 plan 2: ~45 min, phase 2 plan 3: ~10 min, phase 2 plan 4: ~45 min, phase 2 plan 5: ~15 min, gap-01: ~12 min)
 - Awaiting: 2 checkpoint approvals (Supabase setup, Vercel deployment from phase 1)
 
 **By Phase:**
@@ -28,18 +28,19 @@ Progress: [█████████░] 38% (9 plans executed: 4 from phase 1
 | Phase | Plans | Status | Avg Duration |
 |-------|-------|--------|--------------|
 | 1 (Foundation) | 4/4 | Automated done, checkpoints pending | 20 min per plan |
-| 2 (Auth & Design System) | 5/6 | Plans 01-05 complete (Theme + Auth + Layout + Cards + Hero) | ~22 min per plan |
+| 2 (Auth & Design System) | 5/6 + gap-01 | Plans 01-05 + gap-01 complete (Theme + Auth + Layout + Cards + Hero + Dark Mode) | ~21 min per plan |
 
 **Recent Trend:**
-- Automated execution: Phase 2 Plans 1-5 completed (Chakra UI + Auth + Layout + Cards + Hero)
+- Automated execution: Phase 2 Plans 1-5 + gap-01 completed (Chakra UI + Auth + Layout + Cards + Hero + Dark Mode)
 - Fixed Chakra UI v3 API compatibility (Card -> CardRoot, spacing -> gap, as -> asChild, etc.)
 - Five card components created: PostCard, EventCard, WorkCard, MemberCard, CategoryBadge
 - Hero section with custom SplitText animation component (Framer Motion-based)
 - Navbar and Footer updated for v3 API (MenuRoot/Trigger, next-themes toggle)
+- Dark mode fixed: next-themes integration with storageKey for persistence
 - All components using semantic tokens, responsive design, and dark mode support
 - Build succeeds with zero TypeScript errors
 
-*Updated after plan 02-05 execution*
+*Updated after gap-01 execution (2026-03-10 04:30 UTC)*
 
 ## Accumulated Context
 
@@ -82,9 +83,12 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-03-10
-Stopped at: Phase 2 Plan 5 (02-05) complete. Hero section with SplitText animation created. Build succeeds.
+Stopped at: Phase 2 Gap 1 (02-gap-01) complete. Dark mode theme integration fixed with next-themes storageKey. Build succeeds.
 
 Resumption: Ready to execute Phase 2 Plan 6 (Layout integration and Phase 2 verification checkpoint).
+
+**Completed Plan 02-gap-01 Commits:**
+- 2c7a87c: fix(02-gap-01): update Chakra UI provider with next-themes integration
 
 **Completed Plan 02-05 Commits:**
 - 97c86c9: feat(02-05): create hero section component with SplitText animation
