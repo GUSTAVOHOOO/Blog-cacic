@@ -1,16 +1,9 @@
 'use client'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { Container, Heading, Text, Input, Button, Box } from '@chakra-ui/react'
+import { createClient } from '@/lib/supabase/client'
 import styles from './page.module.css'
-import {
-  Container,
-  Heading,
-  Text,
-  Input,
-  Button,
-  Box,
-} from '@chakra-ui/react'
-import { loginWithPassword } from './actions'
 
 export default function LoginPage() {
   const [isPending, setIsPending] = useState(false)
@@ -23,59 +16,71 @@ export default function LoginPage() {
     setIsPending(true)
 
     const formData = new FormData(e.currentTarget)
-    const result = await loginWithPassword(formData)
+    const rawEmail = (formData.get('email') as string).trim().toLowerCase()
 
-    if (!result.success) {
-      setError(result.error ?? 'Erro desconhecido')
+    // Domain validation — @alunos.utfpr.edu.br only (AUTH-01)
+    if (!rawEmail.endsWith('@alunos.utfpr.edu.br')) {
+      setError('Use seu e-mail institucional de aluno da UFPR (@alunos.utfpr.edu.br)')
       setIsPending(false)
       return
     }
 
-    router.push('/dashboard')
+    try {
+      // IMPORTANT: Must use browser client (createBrowserClient) so that the
+      // PKCE code verifier is stored in cookies on the USER's browser.
+      // Calling signInWithOtp from a Server Action cannot store cookies client-side,
+      // which causes the "PKCE code verifier not found in storage" error.
+      const supabase = createClient()
+      const { error: authError } = await supabase.auth.signInWithOtp({
+        email: rawEmail,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          shouldCreateUser: true,
+        },
+      })
+
+      if (authError) {
+        console.error('[login] signInWithOtp error:', authError.message)
+        throw new Error('Erro ao enviar link. Tente novamente.')
+      }
+
+      router.push('/login/verifique-seu-email')
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Erro desconhecido'
+      setError(message)
+      setIsPending(false)
+    }
   }
 
   return (
     <Container maxW="sm" py={20}>
       <Box display="flex" flexDirection="column" gap={8}>
-
-        <Box display="flex" flexDirection="column" gap={1} textAlign="center">
+        <Box display="flex" flexDirection="column" gap={2} textAlign="center">
           <Heading as="h1" size="lg">
-            Entrar
+            Acesse sua conta
           </Heading>
-          <Text color="fg.muted" fontSize="sm">
-            Área restrita — somente administradores
+          <Text color="text.secondary">
+            Enviamos um link mágico para seu e-mail
           </Text>
         </Box>
 
-        <form onSubmit={handleSubmit}>
-          <Box display="flex" flexDirection="column" gap={4}>
-
-            <Box display="flex" flexDirection="column" gap={1}>
-              <label htmlFor="email" className={styles.fieldLabel}>
-                E-mail
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <Box display="flex" flexDirection="column" gap={4} width="100%">
+            <Box>
+              <label htmlFor="email" className={styles.label}>
+                <Text fontSize="sm" fontWeight="500">E-mail Institucional</Text>
               </label>
               <Input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="seu@email.com"
+                placeholder="seu.email@alunos.utfpr.edu.br"
                 disabled={isPending}
                 required
               />
-            </Box>
-
-            <Box display="flex" flexDirection="column" gap={1}>
-              <label htmlFor="password" className={styles.fieldLabel}>
-                Senha
-              </label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="••••••••"
-                disabled={isPending}
-                required
-              />
+              <Text fontSize="xs" color="text.secondary" mt={2}>
+                Use apenas e-mails terminados em @alunos.utfpr.edu.br
+              </Text>
             </Box>
 
             {error && (
@@ -89,16 +94,12 @@ export default function LoginPage() {
               type="submit"
               bg="brand.500"
               color="black"
-              loading={isPending}
-              loadingText="Entrando..."
-              mt={2}
+              disabled={isPending}
             >
-              Entrar
+              {isPending ? 'Enviando...' : 'Enviar Link'}
             </Button>
-
           </Box>
         </form>
-
       </Box>
     </Container>
   )
