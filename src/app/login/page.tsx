@@ -1,9 +1,15 @@
 'use client'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Container, Heading, Text, Input, Button, Box } from '@chakra-ui/react'
+import {
+  Container,
+  Heading,
+  Text,
+  Input,
+  Button,
+  Box,
+} from '@chakra-ui/react'
 import { loginWithPassword } from './actions'
-import styles from './page.module.css'
 
 export default function LoginPage() {
   const [isPending, setIsPending] = useState(false)
@@ -30,21 +36,23 @@ export default function LoginPage() {
   return (
     <Container maxW="sm" py={20}>
       <Box display="flex" flexDirection="column" gap={8}>
-        <Box display="flex" flexDirection="column" gap={2} textAlign="center">
+
+        <Box display="flex" flexDirection="column" gap={1} textAlign="center">
           <Heading as="h1" size="lg">
-            Acesse sua conta
+            Entrar
           </Heading>
-          <Text color="text.secondary">
-            Área restrita para administradores
+          <Text color="fg.muted" fontSize="sm">
+            Área restrita — somente administradores
           </Text>
         </Box>
 
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <Box display="flex" flexDirection="column" gap={4} width="100%">
-            <Box>
-              <label htmlFor="email" className={styles.label}>
-                <Text fontSize="sm" fontWeight="500">E-mail</Text>
-              </label>
+        <form onSubmit={handleSubmit}>
+          <Box display="flex" flexDirection="column" gap={4}>
+
+            <Box display="flex" flexDirection="column" gap={1}>
+              <Text as="label" htmlFor="email" fontSize="sm" fontWeight="500">
+                E-mail
+              </Text>
               <Input
                 id="email"
                 name="email"
@@ -55,10 +63,10 @@ export default function LoginPage() {
               />
             </Box>
 
-            <Box>
-              <label htmlFor="password" className={styles.label}>
-                <Text fontSize="sm" fontWeight="500">Senha</Text>
-              </label>
+            <Box display="flex" flexDirection="column" gap={1}>
+              <Text as="label" htmlFor="password" fontSize="sm" fontWeight="500">
+                Senha
+              </Text>
               <Input
                 id="password"
                 name="password"
@@ -80,12 +88,16 @@ export default function LoginPage() {
               type="submit"
               bg="brand.500"
               color="black"
-              disabled={isPending}
+              loading={isPending}
+              loadingText="Entrando..."
+              mt={2}
             >
-              {isPending ? 'Entrando...' : 'Entrar'}
+              Entrar
             </Button>
+
           </Box>
         </form>
+
       </Box>
     </Container>
   )
