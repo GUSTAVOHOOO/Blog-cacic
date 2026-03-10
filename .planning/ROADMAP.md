@@ -34,10 +34,10 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 4 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Next.js scaffold, folder structure, .gitignore, env template
-- [ ] 01-02-PLAN.md — Supabase schema: all 6 tables, RLS policies, storage buckets
-- [ ] 01-03-PLAN.md — Supabase clients (browser/server/admin) + security headers + CORS
-- [ ] 01-04-PLAN.md — Vercel deployment + live URL verification
+- [x] 01-01-PLAN.md — Next.js scaffold, folder structure, .gitignore, env template
+- [x] 01-02-PLAN.md — Supabase schema: all 6 tables, RLS policies, storage buckets
+- [x] 01-03-PLAN.md — Supabase clients (browser/server/admin) + security headers + CORS
+- [x] 01-04-PLAN.md — Vercel deployment + live URL verification
 
 ### Phase 2: Auth & Design System
 **Goal**: Members can authenticate via Magic Link restricted to @ufpr.br, and every page has the correct CACIC visual identity with dark mode support — so the rest of the site can be built on a stable shell.
@@ -49,7 +49,15 @@ Plans:
   3. Navigating to `/dashboard` while unauthenticated redirects to `/login` immediately.
   4. The dark mode toggle switches the site between light and dark themes; the CACIC yellow (#F5B800) brand color is visible in both modes.
   5. The Navbar, Footer, PostCard, EventCard, WorkCard, MemberCard, and Hero components render correctly on mobile (375px) and desktop (1280px).
-**Plans**: TBD
+**Plans**: 6 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Chakra UI v3 setup, theme config, semantic tokens, Google Fonts
+- [ ] 02-02-PLAN.md — Magic Link auth pipeline (login form, callback, middleware)
+- [ ] 02-03-PLAN.md — Navbar and Footer (responsive layout shell)
+- [ ] 02-04-PLAN.md — Card components (PostCard, EventCard, WorkCard, MemberCard)
+- [ ] 02-05-PLAN.md — Hero section with SplitText animation
+- [ ] 02-06-PLAN.md — Layout integration and Phase 2 verification checkpoint
 
 ### Phase 3: Content & API Layer
 **Goal**: The MDX pipeline is operational so editors can publish posts and news by adding `.mdx` files to the repo, and all backend Route Handlers and the Data Access Layer are in place so pages can fetch live data safely.
@@ -104,8 +112,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/4 | Not started | - |
-| 2. Auth & Design System | 0/TBD | Not started | - |
+| 1. Foundation | 4/4 | All plans executed, awaiting checkpoints | - |
+| 2. Auth & Design System | 0/6 | Planning complete, ready for execution | - |
 | 3. Content & API Layer | 0/TBD | Not started | - |
 | 4. Public Pages | 0/TBD | Not started | - |
 | 5. Dashboard | 0/TBD | Not started | - |
