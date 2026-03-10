@@ -38,8 +38,8 @@ const nextConfig = {
               "default-src 'self'",
               // Supabase API calls
               `connect-src 'self' ${process.env.NEXT_PUBLIC_SUPABASE_URL ?? 'https://*.supabase.co'} wss://*.supabase.co`,
-              // Scripts: self + Next.js inline scripts needed for hydration
-              "script-src 'self' 'unsafe-inline'",
+              // Scripts: self + Next.js inline scripts needed for hydration + eval for dev mode
+              `script-src 'self' 'unsafe-inline' ${process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : ""}`,
               // Styles: self + inline (Chakra CSS-in-JS)
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               // Fonts

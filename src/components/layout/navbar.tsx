@@ -21,7 +21,7 @@ import { useState } from 'react'
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const { resolvedTheme, setTheme } = useTheme()
-  const showMobileMenu = useBreakpointValue({ base: true, md: false }, { fallback: 'md' })
+  const showMobileMenu = useBreakpointValue({ base: true, md: false }, { fallback: 'base' })
 
   return (
     <Box
