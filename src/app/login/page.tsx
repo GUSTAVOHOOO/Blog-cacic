@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Container, Heading, Text, Input, Button, Box } from '@chakra-ui/react'
-import { createClient } from '@/lib/supabase/client'
+import { loginWithPassword } from './actions'
 import styles from './page.module.css'
 
 export default function LoginPage() {
@@ -16,40 +16,15 @@ export default function LoginPage() {
     setIsPending(true)
 
     const formData = new FormData(e.currentTarget)
-    const rawEmail = (formData.get('email') as string).trim().toLowerCase()
+    const result = await loginWithPassword(formData)
 
-    // Domain validation — @alunos.utfpr.edu.br only (AUTH-01)
-    if (!rawEmail.endsWith('@alunos.utfpr.edu.br')) {
-      setError('Use seu e-mail institucional de aluno da UFPR (@alunos.utfpr.edu.br)')
+    if (!result.success) {
+      setError(result.error ?? 'Erro desconhecido')
       setIsPending(false)
       return
     }
 
-    try {
-      // IMPORTANT: Must use browser client (createBrowserClient) so that the
-      // PKCE code verifier is stored in cookies on the USER's browser.
-      // Calling signInWithOtp from a Server Action cannot store cookies client-side,
-      // which causes the "PKCE code verifier not found in storage" error.
-      const supabase = createClient()
-      const { error: authError } = await supabase.auth.signInWithOtp({
-        email: rawEmail,
-        options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
-          shouldCreateUser: true,
-        },
-      })
-
-      if (authError) {
-        console.error('[login] signInWithOtp error:', authError.message)
-        throw new Error('Erro ao enviar link. Tente novamente.')
-      }
-
-      router.push('/login/verifique-seu-email')
-    } catch (err) {
-      const message = err instanceof Error ? err.message : 'Erro desconhecido'
-      setError(message)
-      setIsPending(false)
-    }
+    router.push('/dashboard')
   }
 
   return (
@@ -60,7 +35,7 @@ export default function LoginPage() {
             Acesse sua conta
           </Heading>
           <Text color="text.secondary">
-            Enviamos um link mágico para seu e-mail
+            Área restrita para administradores
           </Text>
         </Box>
 
@@ -68,19 +43,30 @@ export default function LoginPage() {
           <Box display="flex" flexDirection="column" gap={4} width="100%">
             <Box>
               <label htmlFor="email" className={styles.label}>
-                <Text fontSize="sm" fontWeight="500">E-mail Institucional</Text>
+                <Text fontSize="sm" fontWeight="500">E-mail</Text>
               </label>
               <Input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="seu.email@alunos.utfpr.edu.br"
+                placeholder="seu@email.com"
                 disabled={isPending}
                 required
               />
-              <Text fontSize="xs" color="text.secondary" mt={2}>
-                Use apenas e-mails terminados em @alunos.utfpr.edu.br
-              </Text>
+            </Box>
+
+            <Box>
+              <label htmlFor="password" className={styles.label}>
+                <Text fontSize="sm" fontWeight="500">Senha</Text>
+              </label>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                disabled={isPending}
+                required
+              />
             </Box>
 
             {error && (
@@ -96,7 +82,7 @@ export default function LoginPage() {
               color="black"
               disabled={isPending}
             >
-              {isPending ? 'Enviando...' : 'Enviar Link'}
+              {isPending ? 'Entrando...' : 'Entrar'}
             </Button>
           </Box>
         </form>
