@@ -62,7 +62,7 @@ Plans:
 ### Phase 3: Content & API Layer
 **Goal**: The MDX pipeline is operational so editors can publish posts and news by adding `.mdx` files to the repo, and all backend Route Handlers and the Data Access Layer are in place so pages can fetch live data safely.
 **Depends on**: Phase 2
-**Requirements**: CONT-01, CONT-02, CONT-03, CONT-04, API-01, API-02, API-03, API-04, API-05, API-06, SEC-03, SEC-04, SEC-06, SEC-09
+**Requirements**: CONT-01, CONT-02, CONT-03, API-01, API-02, API-03, API-04, API-05, API-06, SEC-03, SEC-04, SEC-06, SEC-09
 **Success Criteria** (what must be TRUE):
   1. Adding a new `.mdx` file with valid frontmatter to `content/posts/` and redeploying causes the post to appear at `/blog/[slug]` with correct styling (headings, code blocks, blockquotes).
   2. `POST /api/contato` rejects requests beyond 5 per 10 minutes from the same IP with a 429 response.
@@ -81,13 +81,14 @@ Plans:
 ### Phase 4: Public Pages
 **Goal**: Every public page of the blog is live, navigable, and populated with real content — visitors can browse posts, events, academic works, and member info without logging in.
 **Depends on**: Phase 3
-**Requirements**: PAGE-01, PAGE-02, PAGE-03, PAGE-04, PAGE-05, PAGE-06, PAGE-07, PAGE-08, PAGE-09, PAGE-10, PAGE-11, PAGE-12
+**Requirements**: CONT-04, PAGE-01, PAGE-02, PAGE-03, PAGE-04, PAGE-05, PAGE-06, PAGE-07, PAGE-08, PAGE-09, PAGE-10, PAGE-11, PAGE-12
 **Success Criteria** (what must be TRUE):
   1. The Home page (`/`) displays the hero, at least one recent post, and at least one upcoming event fetched from Supabase.
   2. The Blog listing (`/blog`) shows all published posts with category filter working; clicking a post opens its full MDX content at `/blog/[slug]`.
   3. The Events listing (`/eventos`) shows upcoming events from Supabase; clicking one opens its detail page at `/eventos/[slug]`.
   4. The Works listing (`/trabalhos`) shows academic works; clicking one opens the detail page with a working PDF download link.
   5. The Members (`/membros`), About (`/sobre`), and Contact (`/contato`) pages load with content and the contact form submits successfully.
+  6. `src/app/blog/[slug]/page.tsx` and `src/app/noticias/[slug]/page.tsx` export `generateStaticParams` calling `getAllPosts()`/`getAllNoticias()` respectively — static slug generation verified in Next.js build output.
 **Plans**: TBD
 
 ### Phase 5: Dashboard

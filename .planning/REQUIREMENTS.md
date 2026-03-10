@@ -177,7 +177,6 @@
 | CONT-01 | Phase 3 | Pending |
 | CONT-02 | Phase 3 | Pending |
 | CONT-03 | Phase 3 | Pending |
-| CONT-04 | Phase 3 | Pending |
 | API-01 | Phase 3 | Pending |
 | API-02 | Phase 3 | Pending |
 | API-03 | Phase 3 | Pending |
@@ -188,6 +187,7 @@
 | SEC-04 | Phase 3 | Pending |
 | SEC-06 | Phase 3 | Pending |
 | SEC-09 | Phase 3 | Pending |
+| CONT-04 | Phase 4 | Pending |
 | PAGE-01 | Phase 4 | Pending |
 | PAGE-02 | Phase 4 | Pending |
 | PAGE-03 | Phase 4 | Pending |
