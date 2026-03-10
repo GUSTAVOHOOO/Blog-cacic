@@ -26,7 +26,7 @@ Ser o ponto de referência digital dos estudantes de CC da UTFPR-SH: um lugar on
 - [ ] Autenticação via Magic Link restrita a e-mail institucional (@ufpr.br)
 - [ ] Dashboard privado para membros autenticados (criar eventos, submeter trabalhos)
 - [ ] Sistema de roles: admin / editor / member
-- [ ] Dark mode com identidade visual CACIC/UTFPR (amarelo #F5B800, preto, branco)
+- [ ] Dark mode com identidade visual CACIC/UTFPR (amarelo #F5B800, preto #0A0A0A, fundo logo #1E1E1E, branco)
 - [ ] SEO completo: meta tags, Open Graph, sitemap automático
 - [ ] Security headers, RLS, validação Zod, proteção CORS
 
@@ -40,7 +40,7 @@ Ser o ponto de referência digital dos estudantes de CC da UTFPR-SH: um lugar on
 ## Context
 
 - Documento de referência completo em `Plano_Blog_CA_CC_UFPR.md` — cobre stack, schema SQL, RLS, segurança, design e estrutura de rotas
-- Identidade visual baseada na logo do CACIC: amarelo UTFPR (#F5B800), preto (#0A0A0A), branco
+- Identidade visual baseada na logo do CACIC: amarelo UTFPR (#F5B800), preto (#0A0A0A), fundo da logo (#1E1E1E), branco
 - Conteúdo editorial (posts, notícias) em MDX — deploy estático via git push
 - Dados dinâmicos (eventos, trabalhos, membros) no Supabase/PostgreSQL
 - Supabase MCP Server disponível para criação de tabelas e RLS via linguagem natural

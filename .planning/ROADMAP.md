@@ -31,7 +31,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. The three storage buckets (`thumbnails`, `trabalhos-pdfs`, `avatares`) exist and accept test uploads via the Supabase dashboard.
   4. Deploying to Vercel succeeds and the live URL returns a 200 with no environment variable errors in logs.
   5. HTTP security headers (HSTS, CSP, X-Frame-Options) are present on every response, verifiable via browser devtools or securityheaders.com.
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Next.js scaffold, folder structure, .gitignore, env template
+- [ ] 01-02-PLAN.md — Supabase schema: all 6 tables, RLS policies, storage buckets
+- [ ] 01-03-PLAN.md — Supabase clients (browser/server/admin) + security headers + CORS
+- [ ] 01-04-PLAN.md — Vercel deployment + live URL verification
 
 ### Phase 2: Auth & Design System
 **Goal**: Members can authenticate via Magic Link restricted to @ufpr.br, and every page has the correct CACIC visual identity with dark mode support — so the rest of the site can be built on a stable shell.
@@ -98,7 +104,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 0/4 | Not started | - |
 | 2. Auth & Design System | 0/TBD | Not started | - |
 | 3. Content & API Layer | 0/TBD | Not started | - |
 | 4. Public Pages | 0/TBD | Not started | - |

@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #333;
+}
+
+body {
+  background: #fff;
+  line-height: 1.5;
+}

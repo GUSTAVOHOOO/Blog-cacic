@@ -39,7 +39,7 @@
 
 ### Design System & UI
 
-- [ ] **UI-01**: Tema Chakra UI v3 com paleta CACIC/UTFPR (brand amarelo #F5B800, preto #0A0A0A)
+- [ ] **UI-01**: Tema Chakra UI v3 com paleta CACIC/UTFPR (brand amarelo #F5B800, preto #0A0A0A, fundo logo CA #1E1E1E, branco)
 - [ ] **UI-02**: Tokens semânticos configurados: `bg.canvas`, `bg.card`, `text.primary`, `border.brand`, etc.
 - [ ] **UI-03**: Fontes Google: Space Grotesk (headings), Inter (body), JetBrains Mono (code)
 - [ ] **UI-04**: Dark mode nativo com `ColorModeButton` do Chakra UI v3
