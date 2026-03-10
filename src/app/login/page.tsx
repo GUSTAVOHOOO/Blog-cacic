@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Container, Heading, Text, Input, Button, Box } from '@chakra-ui/react'
 import { loginWithMagicLink } from './actions'
 import styles from './page.module.css'
@@ -7,6 +8,7 @@ import styles from './page.module.css'
 export default function LoginPage() {
   const [isPending, setIsPending] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -14,12 +16,12 @@ export default function LoginPage() {
     setIsPending(true)
 
     const formData = new FormData(e.currentTarget)
-    try {
-      await loginWithMagicLink(formData)
-    } catch (err) {
-      const message = err instanceof Error ? err.message : 'Erro desconhecido'
-      setError(message)
-    } finally {
+    const result = await loginWithMagicLink(formData)
+
+    if (result.success) {
+      router.push('/login/verifique-seu-email')
+    } else {
+      setError(result.error ?? 'Erro desconhecido')
       setIsPending(false)
     }
   }
