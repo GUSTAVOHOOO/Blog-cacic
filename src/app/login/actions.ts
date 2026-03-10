@@ -18,11 +18,13 @@ export async function loginWithMagicLink(formData: FormData): Promise<{ success:
   }
 
   // Create server client and request magic link
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
   const supabase = await createClient()
+  console.log('[loginWithMagicLink] emailRedirectTo:', `${appUrl}/auth/callback`)
   const { error } = await supabase.auth.signInWithOtp({
     email,
     options: {
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
+      emailRedirectTo: `${appUrl}/auth/callback`,
       shouldCreateUser: true,
     },
   })
