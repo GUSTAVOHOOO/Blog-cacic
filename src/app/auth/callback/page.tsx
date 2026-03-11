@@ -9,11 +9,20 @@ export default function AuthCallbackPage() {
 
   useEffect(() => {
     const supabase = createClient()
-    const code = new URLSearchParams(window.location.search).get('code')
+    const params = new URLSearchParams(window.location.search)
+    const token_hash = params.get('token_hash')
+    const type = params.get('type')
+    const code = params.get('code')
 
-    if (code) {
-      // PKCE flow: o verifier está no document.cookie (setado pelo browser client)
-      // exchangeCodeForSession client-side consegue lê-lo corretamente
+    if (token_hash && type) {
+      // Fluxo token_hash: não precisa de cookie, funciona de qualquer browser
+      supabase.auth.verifyOtp({ token_hash, type: type as any })
+        .then(({ error }) => {
+          if (error) router.push('/login?error=' + encodeURIComponent(error.message))
+          else router.push('/dashboard')
+        })
+    } else if (code) {
+      // Fluxo PKCE legado (fallback)
       supabase.auth.exchangeCodeForSession(code)
         .then(({ error }) => {
           if (error) router.push('/login?error=' + encodeURIComponent(error.message))
