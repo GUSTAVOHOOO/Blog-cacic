@@ -14,20 +14,21 @@ export default function AuthCallbackPage() {
     const type = params.get('type')
     const code = params.get('code')
 
+    const redirect = (error?: string) => {
+      if (error) {
+        router.push('/login?error=' + encodeURIComponent(error))
+      } else {
+        router.refresh()
+        router.push('/dashboard')
+      }
+    }
+
     if (token_hash && type) {
-      // Fluxo token_hash: não precisa de cookie, funciona de qualquer browser
       supabase.auth.verifyOtp({ token_hash, type: type as any })
-        .then(({ error }) => {
-          if (error) router.push('/login?error=' + encodeURIComponent(error.message))
-          else router.push('/dashboard')
-        })
+        .then(({ error }) => redirect(error?.message))
     } else if (code) {
-      // Fluxo PKCE legado (fallback)
       supabase.auth.exchangeCodeForSession(code)
-        .then(({ error }) => {
-          if (error) router.push('/login?error=' + encodeURIComponent(error.message))
-          else router.push('/dashboard')
-        })
+        .then(({ error }) => redirect(error?.message))
     } else {
       router.push('/login?error=no_code')
     }
