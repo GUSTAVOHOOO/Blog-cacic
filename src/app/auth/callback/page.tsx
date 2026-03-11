@@ -9,16 +9,19 @@ export default function AuthCallbackPage() {
 
   useEffect(() => {
     const supabase = createClient()
+    const code = new URLSearchParams(window.location.search).get('code')
 
-    // Com flowType: 'implicit', o Supabase lê o #access_token da URL
-    // automaticamente ao inicializar. Só precisamos verificar a sessão.
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
-        router.push('/dashboard')
-      } else {
-        router.push('/login?error=auth_failed')
-      }
-    })
+    if (code) {
+      // PKCE flow: o verifier está no document.cookie (setado pelo browser client)
+      // exchangeCodeForSession client-side consegue lê-lo corretamente
+      supabase.auth.exchangeCodeForSession(code)
+        .then(({ error }) => {
+          if (error) router.push('/login?error=' + encodeURIComponent(error.message))
+          else router.push('/dashboard')
+        })
+    } else {
+      router.push('/login?error=no_code')
+    }
   }, [router])
 
   return (
